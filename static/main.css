@@ -18,3 +18,10 @@ body{
 p{
     color: antiquewhite;
 }
+li{
+    color:antiquewhite;
+}
+
+#bibliographie{
+    text-align: justify;
+}
