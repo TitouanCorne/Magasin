@@ -1,0 +1,20 @@
+.affiche_objet{
+    background-color: aquamarine;
+}
+
+body{
+    background-image: url('bg.jpg');
+    background-repeat: no-repeat;
+}
+
+#artiste_texte{
+    display: block;
+}
+
+#div_contacts{
+    display: none;
+}
+
+p{
+    color: antiquewhite;
+}
