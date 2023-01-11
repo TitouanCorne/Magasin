@@ -26,6 +26,10 @@
           <input type="string" class="form-control" id="nv_nom">
         </div>
         <div class="mb-3">
+          <label for="photo" class="form-label">Photo</label>
+          <input type="string" class="form-control" id="photo">
+        </div>
+        <div class="mb-3">
             <label for="nv_dimensions" class="form-label">Dimensions (longueur x largeur x hauteur)</label>
             <input type="string" class="form-control" id="nv_dimensions">
         </div>
@@ -45,15 +49,19 @@
       </form>    
     </div>
   </body>
+
   <script>
-    function add_db(NOM, DIMENSIONS, TYPE, PRIX, MDP){
-      if (MDP == "devweb"){ //vérification mot de passe IL FAUDRA FAIRE APPEL AU BACK POUR NE PAS AFFICHER LE MDP
+    const db = require("../back/db")
+    function add_db(NOM, DIMENSIONS, TYPE, PRIX, PHOTO, MDP){
+      if (MDP == "devweb"){ //vérification mot de passe
         //ajouter l'élément dans la base de donnée
         console.log("c'est le bon mdp")
-        Product.build({nom: NOM,
-                      dimensions: DIMENSIONS,
-                      prix: PRIX,
-                      type: TYPE})
+        db.model.Product.create({
+          nom: NOM,
+          dimensions: DIMENSIONS,
+          prix: PRIX,
+          type: TYPE,
+          photo: PHOTO,})
       }
       else if (TYPE != "chaise" || TYPE != "table"){
         TYPE = "divers"
@@ -68,8 +76,9 @@
       DIMENSIONS = document.getElementById("nv_dimensions").value;
       TYPE = document.getElementById("nv_type").value;
       PRIX = document.getElementById("nv_prix").value;
+      PHOTO = document.getElementById("photo").value;
       MDP = document.getElementById("mdp").value;
-      add_db(NOM, DIMENSIONS, PRIX, MDP, TYPE)
+      add_db(NOM, DIMENSIONS, TYPE, PRIX, PHOTO, MDP)
     })
 
   

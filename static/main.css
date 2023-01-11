@@ -3,8 +3,9 @@
 }
 
 body{
-    background-image: url('bg.jpg');
-    background-repeat: no-repeat;
+    background-image: url('bg.png');
+    background-size: 140%;
+    background-repeat: repeat-y;
 }
 
 #artiste_texte{
