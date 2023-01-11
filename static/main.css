@@ -18,6 +18,9 @@ body{
 p{
     color: antiquewhite;
 }
+h4{
+    color: white;
+}
 li{
     color:antiquewhite;
 }
@@ -28,4 +31,17 @@ li{
 
 #artiste_texte{
     margin-top: 65px;
+}
+
+#new_div{
+    margin-top: 50px;
+}
+
+
+#photo {
+    /*Pour arrondir les bords des photos */
+    border:2px solid black; 
+    -moz-border-radius:7px;
+    -webkit-border-radius:7px;
+    border-radius:7px;
 }

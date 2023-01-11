@@ -61,17 +61,19 @@
 
 <script>
   function addElement (list, i) { //list <=> data.rows, i => integer
+    
+    var newDiv = document.createElement("div");
+    newDiv.id = "new_div"
+    // newDiv.setAttribute("row", "icon");
 
     var image_obj = document.createElement("img"); //photo
     image_obj.src = list[i].photo;
-
-    var newDiv = document.createElement("div");
-    // newDiv.setAttribute("row", "icon");
+    image_obj.id = "photo"
 
     var newUl = document.createElement("ul");
     // newUl.setAttribute("col", "icon");
 
-    var newLi1 = document.createElement("li"); //nom
+    var newLi1 = document.createElement("h4"); //nom
     var newNom = document.createTextNode(list[i].nom);
     newLi1.appendChild(newNom);
 
@@ -85,8 +87,8 @@
 
 
     var currentDiv = document.getElementById('bibliothèque_objet');
-    document.getElementById('container').insertBefore(image_obj, currentDiv);
     document.getElementById('container').insertBefore(newDiv, currentDiv);
+    document.getElementById('container').insertBefore(image_obj, currentDiv);
     document.getElementById('container').insertBefore(newUl, currentDiv);
     document.getElementById('container').insertBefore(newLi1, currentDiv);
     document.getElementById('container').insertBefore(newLi2, currentDiv);
