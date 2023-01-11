@@ -30,15 +30,58 @@
             <input type="string" class="form-control" id="nv_dimensions">
         </div>
         <div class="mb-3">
+          <label for="nv_type" class="form-label">Type</label>
+          <input type="string" class="form-control" id="nv_type">
+        </div>
+        <div class="mb-3">
             <label for="nv_prix" class="form-label">Prix</label>
             <input type="string" class="form-control" id="nv_prix">
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
+          <label for="mdp" class="form-label">Mot de passe</label>
+          <input type="password" class="form-control" id="mdp">
         </div>
-        <button type="submit" class="btn btn-secondary">Valider</button>
+        <button type="submit" class="btn btn-secondary" id="valider">Valider</button>
       </form>    
     </div>
   </body>
+  <script>
+    function add_db(NOM, DIMENSIONS, TYPE, PRIX, MDP){
+      if (MDP == "devweb"){ //vérification mot de passe IL FAUDRA FAIRE APPEL AU BACK POUR NE PAS AFFICHER LE MDP
+        //ajouter l'élément dans la base de donnée
+        console.log("c'est le bon mdp")
+        Product.build({nom: NOM,
+                      dimensions: DIMENSIONS,
+                      prix: PRIX,
+                      type: TYPE})
+      }
+      else if (TYPE != "chaise" || TYPE != "table"){
+        TYPE = "divers"
+      }
+      else{
+        //afficher un message d'erreur "mot de passe incorrect"
+        window.alert("Mot de passe incorrect !");
+      }
+    }
+    document.getElementById("valider").addEventListener("click", (event) => {
+      NOM = document.getElementById("nv_nom").value;
+      DIMENSIONS = document.getElementById("nv_dimensions").value;
+      TYPE = document.getElementById("nv_type").value;
+      PRIX = document.getElementById("nv_prix").value;
+      MDP = document.getElementById("mdp").value;
+      add_db(NOM, DIMENSIONS, PRIX, MDP, TYPE)
+    })
+
+  
+// éviter que l'utilisateur ait accès à l'HTML pour ne pas qu'il ait accès au mdp
+document.addEventListener("keydown", function (event){
+    if (event.ctrlKey){
+       event.preventDefault();
+    }
+    if(event.keyCode == 123){
+       event.preventDefault();
+    }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </html>
