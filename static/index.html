@@ -61,6 +61,10 @@
 
 <script>
   function addElement (list, i) { //list <=> data.rows, i => integer
+
+    var image_obj = document.createElement("img"); //photo
+    image_obj.src = list[i].photo;
+
     var newDiv = document.createElement("div");
     // newDiv.setAttribute("row", "icon");
 
@@ -79,12 +83,14 @@
     var newPrix = document.createTextNode(list[i].prix);
     newLi3.appendChild(newPrix);
 
+
     var currentDiv = document.getElementById('bibliothèque_objet');
+    document.getElementById('container').insertBefore(image_obj, currentDiv);
     document.getElementById('container').insertBefore(newDiv, currentDiv);
     document.getElementById('container').insertBefore(newUl, currentDiv);
     document.getElementById('container').insertBefore(newLi1, currentDiv);
     document.getElementById('container').insertBefore(newLi2, currentDiv);
-    document.getElementById('container').insertBefore(newLi3, currentDiv); 
+    document.getElementById('container').insertBefore(newLi3, currentDiv);
 }
 
 function on_click_objet(type) {

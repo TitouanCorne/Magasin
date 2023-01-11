@@ -24,10 +24,10 @@ const Product = sequelize.define('Product', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    // photo:{
-    //     type: DataTypes.STRING,
-    //     allowNull: true
-    // },
+    photo:{
+        type: DataTypes.STRING,
+        allowNull: true
+    },
 }, {
     // Other model options go here
 });
