@@ -84,7 +84,7 @@
     document.getElementById('container').insertBefore(newUl, currentDiv);
     document.getElementById('container').insertBefore(newLi1, currentDiv);
     document.getElementById('container').insertBefore(newLi2, currentDiv);
-    document.getElementById('container').insertBefore(newLi3, currentDiv);
+    document.getElementById('container').insertBefore(newLi3, currentDiv); 
 }
 
 function on_click_objet(type) {
@@ -95,8 +95,9 @@ function on_click_objet(type) {
     fetch('/type/?valeur=' + type)
     .then(response => response.json())
     .then(data => {
+      console.log(data)
     for(let i = 0; i < data.count; i++){
-      // console.log(i)
+      console.log(i)
       addElement(data.rows,i)
     }
     })
@@ -106,10 +107,6 @@ function on_click_objet(type) {
 document.getElementById("artiste").addEventListener("click", (event) => {
   location.reload()   //le fait de refresh ramène sur la page d'accueil correspondant à la partie "artiste"
   event.preventDefault();
-})
-document.getElementById("dropdown_chaises").addEventListener("click", (event) => {
-    on_click_objet("chaise")
-    event.preventDefault();
 })
 document.getElementById("dropdown_chaises").addEventListener("click", (event) => {
     on_click_objet("chaise")

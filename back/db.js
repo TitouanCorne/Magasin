@@ -7,13 +7,9 @@ const sequelize = new Sequelize({
 });
 
 const Product = sequelize.define('Product', {
-    id_product: {
-        type: DataTypes.STRING,
-        primaryKey: true,
-        allowNull: false
-    },
     nom: {
         type: DataTypes.STRING,
+        primaryKey : true,
         allowNull: false
     },
     dimensions:{
@@ -21,7 +17,7 @@ const Product = sequelize.define('Product', {
         allowNull: false
     },
     prix: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     type: {

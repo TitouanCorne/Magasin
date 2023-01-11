@@ -4,35 +4,37 @@ async function initDB() {
     await db.sequelize.sync({force: true})
 
     await db.model.Product.create({
-        id_product: 1,
-        nom: "table",
+        nom: "table cuisine",
         dimensions: "40x30x10",
-        prix: 1000,
+        prix: "1000€",
         type: "table",
     })
 
     await db.model.Product.create({
-        id_product: 2,
-        nom: "table basse",
+        nom: "table basse en acier",
         dimensions: "40x20x10",
-        prix: 500,
+        prix: "500€",
         type: "table",
     })
 
     await db.model.Product.create({
-        id_product: 3,
-        nom: "tabouret",
+        nom: "tabouret en bois",
         dimensions: "40x10x10",
-        prix: 100,
+        prix: "100€",
         type: "chaise",
     })
 
     await db.model.Product.create({
-        id_product: 4,
-        nom: "cadre",
+        nom: "cadre rouge",
         dimensions: "40x30",
-        prix: 200,
+        prix: "200€",
         type: "divers",
+    })
+    await db.model.Product.create({
+        nom: "chaise roulante",
+        dimensions: "40x40",
+        prix: "400€",
+        type: "chaise",
     })
 }
 
