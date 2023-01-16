@@ -19,67 +19,99 @@
           <li><a href="index.html">Accueil</a></li>
         </ul>
       </nav>
-      <form id="login">
-        <p>Ajout d'une nouvelle création à la base de données :</p>
-        <div class="mb-3">
-          <label for="nv_nom" class="form-label">Nom de la création</label>
-          <input type="string" class="form-control" id="nv_nom">
-        </div>
-        <div class="mb-3">
-          <label for="photo" class="form-label">Photo</label>
-          <input type="string" class="form-control" id="photo">
-        </div>
-        <div class="mb-3">
-            <label for="nv_dimensions" class="form-label">Dimensions (longueur x largeur x hauteur)</label>
-            <input type="string" class="form-control" id="nv_dimensions">
-        </div>
-        <div class="mb-3">
-          <label for="nv_type" class="form-label">Type</label>
-          <input type="string" class="form-control" id="nv_type">
-        </div>
-        <div class="mb-3">
-            <label for="nv_prix" class="form-label">Prix</label>
-            <input type="string" class="form-control" id="nv_prix">
-        </div>
-        <div class="mb-3">
-          <label for="mdp" class="form-label">Mot de passe</label>
-          <input type="password" class="form-control" id="mdp">
-        </div>
-        <button type="submit" class="btn btn-secondary" id="valider">Valider</button>
-      </form>    
-    </div>
+      <div class="container" id="div_form">
+        <form id="login">
+          <label for="MDP">Mot de passe administrateur :</label>
+          <input type="text" name="MDP" id="MDP"><br><br>
+        </form>
+        <form id="myForm">
+          <label for="nv_nom">Nom :</label>
+          <input type="text" name="nom" id="nv_nom"><br><br>
+          <label for="nv_dimensions">Dimensions :</label>
+          <input type="text" name="dimensions" id="nv_dimensions"><br><br>
+          <label for="nv_prix">Prix :</label>
+          <input type="text" name="prix" id="nv_prix"><br><br>
+          <label for="nv_type">Type:</label>
+          <select name="type" id="nv_type">
+          <option value=""></option>
+          <option value="table">Table</option>
+          <option value="chaise">Chaise</option>
+          <option value="divers">Divers</option>
+          </select><br><br>
+
+          <label for="nv_photo">Photo :</label>
+          <input type="text" name="photo" id="nv_photo"><br><br>
+          
+          <input type="submit" value="Envoyer">
+        </form>
+      </div>
+  </div>
   </body>
 
   <script>
-    const db = require("../back/db")
-    function add_db(NOM, DIMENSIONS, TYPE, PRIX, PHOTO, MDP){
-      if (MDP == "devweb"){ //vérification mot de passe
-        //ajouter l'élément dans la base de donnée
-        console.log("c'est le bon mdp")
-        db.model.Product.create({
-          nom: NOM,
-          dimensions: DIMENSIONS,
-          prix: PRIX,
-          type: TYPE,
-          photo: PHOTO,})
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    MDP = document.getElementById("MDP").value;
+    if (MDP == "devweb"){ //vérification mot de passe
+      let formData = new FormData(event.target);
+      let data = {};
+      formData.forEach((value, key) => {
+          data[key] = value;
+      });
+      // ...
+      fetch('/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json()) // handle the response as json
+      .then(data => {
+          console.log(data);
+          // do something with the response data
+      })
+      .catch(err => {
+        console.log(err);
+      });
       }
-      else if (TYPE != "chaise" || TYPE != "table"){
-        TYPE = "divers"
-      }
-      else{
-        //afficher un message d'erreur "mot de passe incorrect"
+    else{
+        //si le mot de passe n'est pas le bon
         window.alert("Mot de passe incorrect !");
       }
-    }
-    document.getElementById("valider").addEventListener("click", (event) => {
-      NOM = document.getElementById("nv_nom").value;
-      DIMENSIONS = document.getElementById("nv_dimensions").value;
-      TYPE = document.getElementById("nv_type").value;
-      PRIX = document.getElementById("nv_prix").value;
-      PHOTO = document.getElementById("photo").value;
-      MDP = document.getElementById("mdp").value;
-      add_db(NOM, DIMENSIONS, TYPE, PRIX, PHOTO, MDP)
-    })
+
+    });
+  </script>
+  <script>
+//     const db = require("../back/db")
+//     function add_db(NOM, DIMENSIONS, TYPE, PRIX, PHOTO, MDP){
+//       if (MDP == "devweb"){ //vérification mot de passe
+//         //ajouter l'élément dans la base de donnée
+//         console.log("c'est le bon mdp")
+//         db.model.Product.create({
+//           nom: NOM,
+//           dimensions: DIMENSIONS,
+//           prix: PRIX,
+//           type: TYPE,
+//           photo: PHOTO,})
+//       }
+//       else if (TYPE != "chaise" || TYPE != "table"){
+//         TYPE = "divers"
+//       }
+//       else{
+//         //afficher un message d'erreur "mot de passe incorrect"
+//         window.alert("Mot de passe incorrect !");
+//       }
+//     }
+//     document.getElementById("valider").addEventListener("click", (event) => {
+//       NOM = document.getElementById("nv_nom").value;
+//       DIMENSIONS = document.getElementById("nv_dimensions").value;
+//       TYPE = document.getElementById("nv_type").value;
+//       PRIX = document.getElementById("nv_prix").value;
+//       PHOTO = document.getElementById("photo").value;
+//       MDP = document.getElementById("mdp").value;
+//       add_db(NOM, DIMENSIONS, TYPE, PRIX, PHOTO, MDP)
+//     })
 
   
 // éviter que l'utilisateur ait accès à l'HTML pour ne pas qu'il ait accès au mdp

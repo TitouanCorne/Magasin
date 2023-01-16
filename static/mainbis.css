@@ -118,8 +118,12 @@ section#Contacts {
 background: url('artgallery.jpg') no-repeat center center/cover;;
 }
 
-#login{
+/* #login{
     margin-top: 65px;   
     margin-left: 20px;
     margin-right: 20px;
+} */
+
+#div_form{
+    margin-top: 65px;  
 }

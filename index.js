@@ -1,8 +1,8 @@
-const path = require('path')
-const db = require("./back/db.js")
-
-const express = require('express')
-const app = express()
+const path = require('path');
+const db = require("./back/db.js");
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -25,6 +25,23 @@ app.get(encodeURI('/type'), (req, res) => {
         res.json(data)  //on retourne les données : une liste d'objets
     })
 })
+
+
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+app.post('/submit', (req, res) => {
+  const { nom, dimensions, prix, type } = req.body;
+  db.model.Product.create({ nom, dimensions, prix, type }).then(() => {
+    res.send({ message: "Data inserted Successfully" });
+  }).catch(err => {
+    res.status(500).send({ error: "Error: " + err });
+  });
+});
 
 
 app.use(function (req, res) {
