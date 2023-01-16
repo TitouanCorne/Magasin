@@ -35,8 +35,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.post('/submit', (req, res) => {
-  const { nom, dimensions, prix, type } = req.body;
-  db.model.Product.create({ nom, dimensions, prix, type }).then(() => {
+  const { nom, dimensions, prix, type, photo } = req.body;
+  db.model.Product.create({ nom, dimensions, prix, type, photo }).then(() => {
     res.send({ message: "Data inserted Successfully" });
   }).catch(err => {
     res.status(500).send({ error: "Error: " + err });
